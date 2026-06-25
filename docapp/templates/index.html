@@ -1,0 +1,312 @@
+{% extends 'userbase.html' %}
+{% load static %}
+
+{% block content %}
+{% include 'userincludes/hero-section.html' %}
+<!-- Services Section Start -->
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h2 class="fw-bold">Largest Healthcare Network Across East Pakistan</h2>
+        <p class="text-muted">Find best doctors across specialities or hospitals in your city.</p>
+    </div>
+
+    <div class="row g-4">
+        <!-- Card 1 -->
+        <div class="col-lg-6">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="row g-0 align-items-center">
+                    <div class="col-md-4">
+                        <img src="{% static 'img/lab-test.png' %}" class="img-fluid rounded-start" alt="Lab Test">
+                    </div>
+                    <div class="col-md-8 p-3">
+                        <h5 class="card-title fw-bold">Book Lab Test</h5>
+                        <p class="card-text text-muted mb-2">It's fast, easy and secure</p>
+                        <a href="#" class="btn btn-primary btn-sm mb-2">Find Diagnostic Center</a><br>
+                        <small class="text-danger"><i class="fa fa-tags"></i> Get Upto 25% OFF On Lab Test</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="col-lg-6">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="row g-0 align-items-center">
+                    <div class="col-md-4">
+                        <img src="{% static 'img/appointment.png' %}" class="img-fluid rounded-start" alt="Appointment">
+                    </div>
+                    <div class="col-md-8 p-3">
+                        <h5 class="card-title fw-bold">Book Appointment</h5>
+                        <p class="card-text text-muted mb-2">For hospital & clinical admissions.</p>
+                        <a href="#" class="btn btn-primary btn-sm mb-2">Find Doctors Now</a><br>
+                        <small class="text-danger"><i class="fa fa-tags"></i> Save your time with online booking</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="col-lg-6">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="row g-0 align-items-center">
+                    <div class="col-md-4">
+                        <img src="{% static 'img/buy-medicine.png' %}" class="img-fluid rounded-start" alt="Buy Medicine">
+                    </div>
+                    <div class="col-md-8 p-3">
+                        <h5 class="card-title fw-bold">Buy Medicine</h5>
+                        <p class="card-text text-muted mb-2">We got all your health needs covered!</p>
+                        <a href="#" class="btn btn-primary btn-sm mb-2">Buy Now</a><br>
+                        <small class="text-danger"><i class="fa fa-tags"></i> Get Upto 25% OFF On Medicines</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="col-lg-6">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="row g-0 align-items-center">
+                    <div class="col-md-4">
+                        <img src="{% static 'img/surgery-assistance.png' %}" class="img-fluid rounded-start" alt="Surgery Assistance">
+                    </div>
+                    <div class="col-md-8 p-3">
+                        <h5 class="card-title fw-bold">Surgery Assistance</h5>
+                        <p class="card-text text-muted mb-2">For best and affordable surgical treatment.</p>
+                        <a href="#" class="btn btn-primary btn-sm mb-2">Consult Now</a><br>
+                        <small class="text-danger"><i class="fa fa-tags"></i> Get Upto 15% Savings</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Services Section End -->
+ <!-- Health Stats Section Start -->
+<div class="container-fluid py-5 bg-light">
+    <div class="container text-center">
+        <div class="row g-4">
+            <div class="col-md-3">
+                <div class="card shadow-sm p-4 border-0">
+                    <h2 class="text-primary">15,000+</h2>
+                    <p class="mb-0">Patients Treated</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card shadow-sm p-4 border-0">
+                    <h2 class="text-success">100+</h2>
+                    <p class="mb-0">Expert Doctors</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card shadow-sm p-4 border-0">
+                    <h2 class="text-info">200+</h2>
+                    <p class="mb-0">Medical Staff</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card shadow-sm p-4 border-0">
+                    <h2 class="text-danger">98%</h2>
+                    <p class="mb-0">Recovery Rate</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Health Stats Section End -->
+
+<!-- About Us Section Start -->
+<div class="container-fluid py-5" style="background: #f9fdfd;">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <!-- Image Column -->
+        <div class="col-lg-6">
+          <img src="{% static 'img/about-1.jpg' %}" alt="About Our Clinic" class="img-fluid rounded-4 shadow-lg">
+        </div>
+  
+        <!-- Text Column -->
+        <div class="col-lg-6">
+          <h2 class="mb-4 fw-bold" style="color: #00acc1;">Who We Are</h2>
+          <p class="mb-3 text-secondary fs-5">
+            Welcome to <strong class="text-dark">RYK HealthCare Center</strong>, a place where your health and well-being come first.
+            With years of dedicated service, we pride ourselves on providing comprehensive, compassionate, and personalized medical care to our community.
+          </p>
+          <p class="text-secondary fs-6">
+            From routine checkups to specialized treatments, our clinic combines state-of-the-art technology with a patient-first philosophy to ensure your care journey is seamless and stress-free. 
+            Our team of experienced medical professionals is here to support you every step of the way.
+          </p>
+          <a href="{% url 'appointment' %}" class="btn mt-3 px-4 py-2 text-white" style="background: linear-gradient(to right, #00bcd4, #00acc1); border-radius: 30px;">
+            Book An Appointment
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- About Us Section End -->
+  
+<!-- Mission & Vision Section Start -->
+<div class="container-fluid py-5" style="background: linear-gradient(to right, #00bcd4, #00acc1); color: white;">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="display-5 fw-bold">Our Mission & Vision</h2>
+        <p class="fs-5">Committed to delivering excellence in healthcare</p>
+      </div>
+      <div class="row g-4">
+  
+        <!-- Mission -->
+        <div class="col-lg-6">
+          <div class="p-5 bg-white rounded-4 shadow h-100">
+            <h4 class="mb-3" style="color: #00acc1;">Our Mission</h4>
+            <p class="text-muted mb-0">
+              To provide accessible, affordable, and comprehensive healthcare services to every individual with compassion and excellence.
+              We are dedicated to promoting wellness, restoring health, and improving lives through patient-centered care.
+            </p>
+          </div>
+        </div>
+  
+        <!-- Vision -->
+        <div class="col-lg-6">
+          <div class="p-5 bg-white rounded-4 shadow h-100">
+            <h4 class="mb-3" style="color: #00acc1;">Our Vision</h4>
+            <p class="text-muted mb-0">
+              To be the leading healthcare provider recognized for clinical excellence, innovation, and a commitment to enhancing the health
+              and well-being of the communities we serve.
+            </p>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  <!-- Mission & Vision Section End -->
+  
+
+
+<!-- Services Section Start -->
+<div class="container-fluid py-5" style="background-color: #f9f9f9;">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold" style="color: #00B1C8;">Our Services</h2>
+            <p class="fs-5 text-muted">Explore our specialized and comprehensive medical offerings</p>
+        </div>
+        <div class="row g-4">
+
+            <!-- Service Item -->
+            <div class="col-md-6 col-lg-4">
+                <div class="bg-white p-4 rounded-4 shadow-sm h-100 text-center border-start border-4" style="border-color: #00B1C8;">
+                    <div class="mb-3">
+                        <i class="fas fa-user-md fa-2x" style="color: #00B1C8;"></i>
+                    </div>
+                    <h5 class="fw-semibold">General Consultation</h5>
+                    <p class="text-muted">Routine health checkups and guidance from experienced physicians.</p>
+                </div>
+            </div>
+
+            <!-- Service Item -->
+            <div class="col-md-6 col-lg-4">
+                <div class="bg-white p-4 rounded-4 shadow-sm h-100 text-center border-start border-4" style="border-color: #00B1C8;">
+                    <div class="mb-3">
+                        <i class="fas fa-heartbeat fa-2x" style="color: #00B1C8;"></i>
+                    </div>
+                    <h5 class="fw-semibold">Cardiology</h5>
+                    <p class="text-muted">Advanced heart diagnostics and treatment plans.</p>
+                </div>
+            </div>
+
+            <!-- Service Item -->
+            <div class="col-md-6 col-lg-4">
+                <div class="bg-white p-4 rounded-4 shadow-sm h-100 text-center border-start border-4" style="border-color: #00B1C8;">
+                    <div class="mb-3">
+                        <i class="fas fa-x-ray fa-2x" style="color: #00B1C8;"></i>
+                    </div>
+                    <h5 class="fw-semibold">Radiology</h5>
+                    <p class="text-muted">Precise imaging services including X-ray, CT, and MRI.</p>
+                </div>
+            </div>
+
+            <!-- Service Item -->
+            <div class="col-md-6 col-lg-4">
+                <div class="bg-white p-4 rounded-4 shadow-sm h-100 text-center border-start border-4" style="border-color: #00B1C8;">
+                    <div class="mb-3">
+                        <i class="fas fa-stethoscope fa-2x" style="color: #00B1C8;"></i>
+                    </div>
+                    <h5 class="fw-semibold">Pediatrics</h5>
+                    <p class="text-muted">Care and support tailored for children and infants.</p>
+                </div>
+            </div>
+
+            <!-- Service Item -->
+            <div class="col-md-6 col-lg-4">
+                <div class="bg-white p-4 rounded-4 shadow-sm h-100 text-center border-start border-4" style="border-color: #00B1C8;">
+                    <div class="mb-3">
+                        <i class="fas fa-tooth fa-2x" style="color: #00B1C8;"></i>
+                    </div>
+                    <h5 class="fw-semibold">Dental Services</h5>
+                    <p class="text-muted">Routine dental care to oral surgery with modern equipment.</p>
+                </div>
+            </div>
+
+            <!-- Service Item -->
+            <div class="col-md-6 col-lg-4">
+                <div class="bg-white p-4 rounded-4 shadow-sm h-100 text-center border-start border-4" style="border-color: #00B1C8;">
+                    <div class="mb-3">
+                        <i class="fas fa-syringe fa-2x" style="color: #00B1C8;"></i>
+                    </div>
+                    <h5 class="fw-semibold">Vaccinations</h5>
+                    <p class="text-muted">Essential and travel vaccines administered safely.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Services Section End -->
+
+
+<!-- Doctors Section Start -->
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h2 class="fw-bold" style="color: #00B1C8;">Meet Our Doctors</h2>
+        <p class="fs-5 text-muted">Expert specialists offering personalized care.</p>
+    </div>
+
+    <div class="row g-4">
+        {% for doctor in doctors %}
+        <div class="col-md-6 col-lg-4">
+            <div class="card border-0 shadow-sm rounded-4 h-100">
+                {% if doctor.image %}
+                <img src="{{ doctor.image.url }}" alt="{{ doctor.name }}" class="card-img-top rounded-top-4" style="height: 250px; object-fit: cover;">
+                {% else %}
+                <img src="{% static 'img/default-doctor.png' %}" alt="Doctor" class="card-img-top rounded-top-4" style="height: 250px; object-fit: cover;">
+                {% endif %}
+
+                <div class="card-body">
+                    <h5 class="card-title fw-semibold mb-1">{{ doctor.name }}</h5>
+                    <span class="badge rounded-pill" style="background-color: #00B1C8;">{{ doctor.specialization }}</span>
+                    <p class="mt-3 text-muted"><strong>Consultation:</strong> {{ doctor.consultation }}</p>
+
+                    <div class="d-flex align-items-center text-muted mb-2">
+                        <i class="fas fa-star text-warning me-2"></i> {{ doctor.rating }}
+                        <small class="ms-auto">({{ doctor.experience }} yrs)</small>
+                    </div>
+
+                    <p class="text-muted mb-3"><i class="fas fa-map-marker-alt me-2"></i>{{ doctor.location }}</p>
+
+                    <a href="{% url 'appointment' %}?doctor_id={{ doctor.id }}" class="btn w-100" style="background-color: #00B1C8; color: white;">Book Appointment</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center">
+            <p class="text-danger">No doctors available at the moment.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<!-- Doctors Section End -->
+
+  
+
+
+{% endblock %}
+

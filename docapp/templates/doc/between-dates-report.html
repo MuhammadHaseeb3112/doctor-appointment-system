@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid py-4">
+
+    <!-- Page Header -->
+    <div class="row mb-4">
+        <div class="col">
+            <h3 class="fw-semibold text-dark">Appointment Report</h3>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="{% url 'doctor_home' %}" class="text-muted">Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Between Dates Report of Appointment</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Alert Messages -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <!-- Update Website Details Form -->
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title mb-0">Between Dates Report</h5>
+                </div>
+                <div class="card-body">
+                    <form method="get" action="{% url 'between_date_report' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="mb-3 row">
+                            <label class="col-sm-3 col-form-label">From Date</label>
+                            <div class="col-sm-9">
+                                <input type="date" name="start_date" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label class="col-sm-3 col-form-label">To Date</label>
+                            <div class="col-sm-9">
+                                <input type="date" name="end_date" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-dark">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Appointment Data Table -->
+    <div class="row mt-4">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    {% if patient %}
+                        <p class="text-center text-primary" style="font-size: 18px;">Data Between: "{{ start_date }}" to "{{ end_date }}"</p>
+                        <div class="table-responsive">
+                            <table class="table table-hover table-centered mb-0 datatable">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>Appointment Number</th>
+                                        <th>Patient Name</th>
+                                        <th>Date of Appointment</th>
+                                        <th>Time of Appointment</th>
+                                        <th>Creation Date</th>
+                                        <th>Status</th>
+                                        <th class="text-right">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for i in patient %}
+                                    <tr>
+                                        <td>{{i.appointmentnumber}}</td>
+                                        <td>{{i.fullname}}</td>
+                                        <td>{{i.date_of_appointment}}</td>
+                                        <td>{{i.time_of_appointment}}</td>
+                                        <td>{{i.created_at}}</td>
+                                        <td>{{ i.status|default:"Not Updated Yet" }}</td>
+                                        <td class="text-right">
+                                            <a href="{% url 'patientappointmentdetails' i.id %}" class="btn btn-sm btn-primary">View</a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <p class="text-center text-danger">No appointments found for the selected date range.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

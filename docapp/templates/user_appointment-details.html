@@ -1,0 +1,87 @@
+{% extends 'userbase.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Custom Page Header -->
+<div class="bg-primary text-white py-5 mb-4">
+    <div class="container text-center">
+        <h1 class="display-5">Appointment Details</h1>
+        <p class="lead mb-0">Review the patient's appointment information and history</p>
+    </div>
+</div>
+
+<!-- Appointment Details -->
+<div class="container py-4">
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+
+    {% for i in patientdetails %}
+    <div class="card shadow-sm mb-4 border-0">
+        <div class="card-header bg-light d-flex justify-content-between align-items-center">
+            <h5 class="mb-0 text-primary">Appointment #{{ i.appointmentnumber }}</h5>
+            <span class="text-muted">Date: {{ i.date_of_appointment }}</span>
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-md-6"><strong>Patient Name:</strong> {{ i.fullname }}</div>
+                <div class="col-md-6"><strong>Contact Number:</strong> {{ i.mobilenumber }}</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6"><strong>Email:</strong> {{ i.email }}</div>
+                <div class="col-md-6"><strong>Time:</strong> {{ i.time_of_appointment }}</div>
+            </div>
+            <div class="mb-3">
+                <strong>Message:</strong> {{ i.additional_msg|default:"No message provided" }}
+            </div>
+
+            <hr>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <strong>Doctor Remark:</strong>
+                    {% if i.status == '0' %} Not Updated Yet {% else %} {{ i.remark }} {% endif %}
+                </div>
+                <div class="col-md-6">
+                    <strong>Status:</strong>
+                    {% if i.status == '0' %}
+                        <span class="badge bg-warning text-dark">Pending</span>
+                    {% else %}
+                        <span class="badge bg-success">{{ i.status }}</span>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <strong>Prescribed Medicine:</strong>
+                    {% if i.status == 'Completed' %}
+                        {{ i.prescription }}
+                    {% else %}
+                        <span class="text-muted">Not Prescribed Yet</span>
+                    {% endif %}
+                </div>
+                <div class="col-md-6">
+                    <strong>Recommended Test:</strong>
+                    {% if i.status == 'Completed' %}
+                        {{ i.recommendedtest }}
+                    {% else %}
+                        <span class="text-muted">Not Recommended Yet</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    <!-- Back to Search Button -->
+    <div class="text-center mt-4">
+        <a href="{% url 'user_search_appointment' %}" class="btn btn-outline-primary btn-lg">
+            ← Search More Appointments
+        </a>
+    </div>
+</div>
+{% endblock %}

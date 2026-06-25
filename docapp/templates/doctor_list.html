@@ -1,0 +1,82 @@
+{% load static %}
+{% include 'userincludes/header.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Doctors</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .doctor-card {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: 0.3s;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        .doctor-card:hover {
+            transform: translateY(-5px);
+        }
+        .doctor-image img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        .rating i {
+            color: #f4c150;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container py-5">
+
+    <!-- Search Bar -->
+    <form method="GET" action="{% url 'doctor_list' %}" class="mb-5">
+        <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="Search doctors by name or speciality..." value="{{ request.GET.q }}">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
+
+    <div class="row g-4">
+
+        {% for doctor in doctors %}
+        <!-- Doctor Card Start -->
+        <div class="col-md-6 col-lg-4">
+            <div class="doctor-card">
+                <div class="doctor-image">
+                    {% if doctor.image %}
+                        <img src="{{ doctor.image.url }}" alt="{{ doctor.name }}" class="img-fluid rounded-top">
+                    {% else %}
+                        <img src="{% static 'img/default-doctor.png' %}" alt="Default Doctor" class="img-fluid rounded-top">
+                    {% endif %}
+                </div>
+                
+                <div class="p-4">
+                    <h5 class="mb-2">{{ doctor.name }}</h5>
+                    <p class="text-primary mb-1">{{ doctor.specialization}}</p>
+                    <p class="mb-2"><strong>Consult for:</strong> {{ doctor.consultation}}</p>
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="rating me-2">
+                            <i class="fas fa-star"></i> {{ doctor.rating }}
+                        </div>
+                        <small class="text-muted">({{ doctor.experience }} Years Experience)</small>
+                    </div>
+                    <p class="text-muted mb-3"><i class="fas fa-map-marker-alt me-2"></i>{{ doctor.location }}</p>
+                    <a href="{% url 'appointment' %}?doctor_id={{ doctor.id }}" class="btn btn-primary w-100">Book Appointment</a>
+                </div>
+            </div>
+        </div>
+        <!-- Doctor Card End -->
+        {% empty %}
+        <p>No doctors found.</p>
+        {% endfor %}
+
+    </div>
+</div>
+{% include 'userincludes/footer.html' %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

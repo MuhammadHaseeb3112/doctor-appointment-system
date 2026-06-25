@@ -1,0 +1,129 @@
+{% extends 'userbase.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Header Section -->
+<div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
+    <div class="container py-5">
+        <h1 class="display-3 text-white mb-3 animated slideInDown">Appointment</h1>
+        <nav aria-label="breadcrumb" class="animated slideInDown">
+            <ol class="breadcrumb text-uppercase mb-0">
+                <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
+                <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
+                <li class="breadcrumb-item text-primary active" aria-current="page">Appointment</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<!-- Appointment Section -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-5 align-items-start">
+            <!-- Contact Info -->
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                <span class="badge bg-primary mb-3">Appointment</span>
+                <h1 class="mb-4">Make An Appointment With Our Doctor</h1>
+                <p class="mb-4 text-muted">We are here to assist you with your health needs. Schedule a consultation with one of our expert doctors.</p>
+
+                {% for i in page %}
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-body d-flex align-items-center">
+                        <div class="icon-box rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
+                            <i class="fa fa-phone-alt"></i>
+                        </div>
+                        <div>
+                            <small class="text-muted">Call Us Now</small>
+                            <h5 class="mb-0">+{{i.mobilenumber}}</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-body d-flex align-items-center">
+                        <div class="icon-box rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
+                            <i class="fa fa-envelope-open"></i>
+                        </div>
+                        <div>
+                            <small class="text-muted">Mail Us Now</small>
+                            <h5 class="mb-0">{{i.email}}</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body d-flex align-items-center">
+                        <div class="icon-box rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
+                            <i class="fa fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <small class="text-muted">Address</small>
+                            <h5 class="mb-0">{{i.address}}</h5>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="card shadow-sm border-0">
+                    <div class="card-body p-4">
+                        <h4 class="mb-4 text-center text-primary">Book Your Appointment</h4>
+                        <form method="POST" action="{% url 'appointment' %}">
+                            {% csrf_token %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                        {{ message }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                            <div class="row g-3">
+                                <div class="col-12 col-sm-6">
+                                    <label for="fullname" class="form-label">Your Name</label>
+                                    <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Enter your full name" required>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <label for="email" class="form-label">Your Email</label>
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email address" pattern="[^ @]*@[^ @]*" required>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <label for="mobilenumber" class="form-label">Your Mobile Number</label>
+                                    <input type="text" class="form-control" id="mobilenumber" name="mobilenumber" placeholder="Enter your 10-digit mobile number" maxlength="10" required>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <label for="doctor_id" class="form-label">Choose Doctor</label>
+                                    <select class="form-select" id="doctor_id" name="doctor_id" required>
+                                        <option value="" disabled selected>Select a doctor</option>
+                                        {% for doctor in doctorview %}
+                                            <option value="{{ doctor.id }}">
+                                                {{ doctor.admin.first_name }} {{ doctor.admin.last_name }} ({{ doctor.specialization_id.sname }})
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <label for="date_of_appointment" class="form-label">Date of Appointment</label>
+                                    <input type="date" class="form-control" id="date_of_appointment" name="date_of_appointment" placeholder="Select Date" required>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <label for="time_of_appointment" class="form-label">Time of Appointment</label>
+                                    <input type="time" class="form-control" id="time_of_appointment" name="time_of_appointment" step="60" placeholder="Select Time" required>
+                                </div>
+                                <div class="col-12">
+                                    <label for="additional_msg" class="form-label">Describe Your Problem (Optional)</label>
+                                    <textarea class="form-control" id="additional_msg" rows="4" name="additional_msg" placeholder="Please provide a brief description of your medical issue..."></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary w-100 py-2">Book Appointment</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container-fluid py-4">
+
+    <!-- Page Header -->
+    <div class="row mb-4">
+        <div class="col">
+            <h3 class="fw-semibold">Search Doctor</h3>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="{% url 'admin_home' %}">Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Search Doctor</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Search Form -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title">Search Doctor</h5>
+            <form method="GET">
+                {% csrf_token %}
+                <div class="row align-items-center mb-3">
+                    <div class="col-md-6">
+                        <label for="query" class="form-label">Search (by Mobile Number or Name)</label>
+                        <input type="text" id="query" name="query" class="form-control" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Flash Messages -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <!-- Doctor Search Results -->
+    {% if searchdoc %}
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover table-center mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>S.No</th>
+                            <th>Full Name</th>
+                            <th>Mobile Number</th>
+                            <th>Email</th>
+                            <th>Registration Date</th>
+                            <th class="text-end">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in searchdoc %}
+                        <tr>
+                            <td>{{ i.id }}</td>
+                            <td>{{ i.admin.first_name }} {{ i.admin.last_name }}</td>
+                            <td>{{ i.mobilenumber }}</td>
+                            <td>{{ i.admin.email }}</td>
+                            <td>{{ i.regdate_at }}</td>
+                            <td class="text-end">
+                                <div class="btn-group" role="group">
+                                    <a href="{% url 'viewdoctordetails' i.id %}" class="btn btn-sm btn-success">View</a>
+                                    <a href="{% url 'viewdoctorappointmentlist' i.id %}" class="btn btn-sm btn-danger">Appointment List</a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% elif query %}
+    <div class="alert alert-info text-center mt-4">
+        No records found for: <strong>"{{ query }}"</strong>
+    </div>
+    {% endif %}
+
+</div>
+
+{% endblock %}

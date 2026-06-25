@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container-fluid py-4">
+
+    <!-- Page Header -->
+    <div class="row mb-4">
+        <div class="col">
+            <h3 class="fw-semibold">Appointment Details</h3>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="{% url 'admin_home' %}">Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">View Appointment</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Flash Messages -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <!-- Appointment Details -->
+    {% for i in patientdetails %}
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-light">
+            <strong>Appointment Number:</strong> {{ i.appointmentnumber }}
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-md-6"><strong>Patient Name:</strong> {{ i.fullname }}</div>
+                <div class="col-md-6"><strong>Contact Number:</strong> {{ i.mobilenumber }}</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6"><strong>Email:</strong> {{ i.email }}</div>
+                <div class="col-md-6"><strong>Date of Appointment:</strong> {{ i.date_of_appointment }}</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6"><strong>Time of Appointment:</strong> {{ i.time_of_appointment }}</div>
+                <div class="col-md-6"><strong>Message:</strong> {{ i.additional_msg|default:"N/A" }}</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <strong>Doctor Remark:</strong>
+                    {% if i.status == '0' %}
+                        <span class="text-muted">Not Updated Yet</span>
+                    {% else %}
+                        {{ i.remark }}
+                    {% endif %}
+                </div>
+                <div class="col-md-6">
+                    <strong>Status:</strong>
+                    {% if i.status == '0' %}
+                        <span class="text-muted">Not Updated Yet</span>
+                    {% else %}
+                        {{ i.status }}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <strong>Prescribed Medicine:</strong>
+                    {% if i.status == 'Completed' %}
+                        {{ i.prescription }}
+                    {% else %}
+                        <span class="text-muted">Not Prescribed Yet</span>
+                    {% endif %}
+                </div>
+                <div class="col-md-6">
+                    <strong>Recommended Test:</strong>
+                    {% if i.status == 'Completed' %}
+                        {{ i.recommendedtest }}
+                    {% else %}
+                        <span class="text-muted">Not Recommended Yet</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="alert alert-info">No appointment details available.</div>
+    {% endfor %}
+
+</div>
+
+{% endblock %}

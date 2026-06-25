@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container-fluid py-4">
+
+    <!-- Page Header -->
+    <div class="row mb-4">
+        <div class="col">
+            <h3 class="fw-semibold">Doctor Details</h3>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="{% url 'admin_home' %}">Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Doctor Details</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Messages -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <!-- Doctor Info Card -->
+    <div class="row">
+        <div class="col-lg-10">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    {% for i in doctorlist1 %}
+                    <table class="table table-bordered table-striped align-middle">
+                        <tbody>
+                            <tr>
+                                <th scope="row">Name of Doctor</th>
+                                <td>{{ i.admin.first_name }} {{ i.admin.last_name }}</td>
+                                <th>Contact Number</th>
+                                <td>{{ i.mobilenumber }}</td>
+                            </tr>
+                            <tr>
+                                <th>Email Address</th>
+                                <td>{{ i.admin.email }}</td>
+                                <th>Doctor Specialization</th>
+                                <td>{{ i.specialization_id.sname }}</td>
+                            </tr>
+                            <tr>
+                                <th>Profile Picture</th>
+                                <td><img src="{{ i.admin.profile_pic.url }}" alt="Profile" width="60" height="60" class="rounded-circle"></td>
+                                <th>Date of Registration</th>
+                                <td>{{ i.regdate_at }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    {% endfor %}
+                </div>
+                <div class="card-footer text-end">
+                    <a href="{% url 'viewdoctorlist' %}" class="btn btn-secondary">Back to Doctor List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

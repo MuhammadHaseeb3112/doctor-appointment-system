@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="content container-fluid">
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">Appointments List</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'doctor_home' %}">Dashboard</a></li>
+                    <li class="breadcrumb-item active">View Appointment</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card card-table">
+                <div class="card-body">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <div class="table-responsive">
+                        <table class="table table-hover table-center mb-0 datatable">
+                            {% for i in patientdetails %}
+                            <tr>
+                                <td colspan="4">
+                                    <strong style="font-size: medium;">Appointment Number: {{ i.appointmentnumber }}</strong>
+                                    <strong style="float: right;">Date: {{ i.date_of_appointment }}</strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Patient Name</th><td>{{ i.fullname }}</td>
+                                <th>Patient Contact Number</th><td>{{ i.mobilenumber }}</td>
+                            </tr>
+                            <tr>
+                                <th>Patient Email</th><td>{{ i.email }}</td>
+                                <th>Date of Appointment</th><td>{{ i.date_of_appointment }}</td>
+                            </tr>
+                            <tr>
+                                <th>Time of Appointment</th><td>{{ i.time_of_appointment }}</td>
+                                <th>Message</th><td>{{ i.additional_msg }}</td>
+                            </tr>
+                            <tr>
+                                <th>Doctor Remark</th>
+                                <td>{{ i.remark if i.status != '0' else 'Not Updated Yet' }}</td>
+                                <th>Status</th>
+                                <td>{{ i.status if i.status != '0' else 'Not Updated Yet' }}</td>
+                            </tr>
+                            <tr>
+                                <th>Prescribed Medicine</th>
+                                <td>{{ i.prescription if i.status == 'Completed' else 'Not Prescribed Yet' }}</td>
+                                <th>Recommended Test</th>
+                                <td>{{ i.recommendedtest if i.status == 'Completed' else 'Not Recommended Yet' }}</td>
+                            </tr>
+                        </table>
+
+                        {% if i.status == 'Approved' %}
+                        <p class="text-center mt-4">
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Take Action</button>
+                        </p>
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <form method="POST" action="{% url 'patientappointmentprescription' %}">
+                                        {% csrf_token %}
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Take Action</h5>
+                                            <button type="button" class="close" data-dismiss="modal">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <table class="table table-bordered">
+                                                <tr>
+                                                    <th>Prescribed Medicine:</th>
+                                                    <td>
+                                                        <textarea name="prescription" placeholder="Prescribed Medicine" rows="5" class="form-control" required></textarea>
+                                                    </td>
+                                                    <input type="hidden" name="pat_id" value="{{ i.id }}">
+                                                </tr>
+                                                <tr>
+                                                    <th>Recommended Test:</th>
+                                                    <td>
+                                                        <textarea name="recommendedtest" placeholder="Recommended Test" rows="5" class="form-control" required></textarea>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Status:</th>
+                                                    <td>
+                                                        <select name="status" class="form-control" required>
+                                                            <option value="Completed" selected>Completed</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="submit" name="submit" class="btn btn-primary">Update</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        <hr>
+                        {% endfor %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

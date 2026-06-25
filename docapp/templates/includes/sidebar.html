@@ -1,0 +1,123 @@
+{% load static %}
+{% if user.user_type == '1' %}
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-inner slimscroll">
+        <div id="sidebar-menu" class="sidebar-menu">
+            <ul>
+                <li class="menu-title">
+                    <span>Main Menu</span>
+                </li>
+
+                <li>
+                    <a href="{% url 'admin_home' %}" class="d-flex align-items-center">
+                        <i class="fas fa-tachometer-alt me-2"></i> 
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+
+                <li class="submenu">
+                    <a href="#" class="d-flex align-items-center">
+                        <i class="fas fa-cogs me-2"></i>
+                        <span>Specialization</span> 
+                        <span class="menu-arrow ms-auto"></span>
+                    </a>
+                    <ul>
+                        <li><a href="{% url 'add_specilizations' %}">Add</a></li>
+                        <li><a href="{% url 'manage_specilizations' %}">Manage</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="{% url 'viewdoctorlist' %}" class="d-flex align-items-center">
+                        <i class="fas fa-user-md me-2"></i>
+                        <span>Doctor List</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'search_doctor' %}" class="d-flex align-items-center">
+                        <i class="fas fa-search me-2"></i>
+                        <span>Search Doctor</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'doctor_between_date_report' %}" class="d-flex align-items-center">
+                        <i class="fa fa-file me-2"></i>
+                        <span>Doctor Reg Report</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'website_update' %}" class="d-flex align-items-center">
+                        <i class="fas fa-cogs me-2"></i>
+                        <span>Website Page</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% else %}
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-inner slimscroll">
+        <div id="sidebar-menu" class="sidebar-menu">
+            <ul>
+                <li class="menu-title">
+                    <span>Main Menu</span>
+                </li>
+
+                <li>
+                    <a href="{% url 'doctor_home' %}" class="d-flex align-items-center">
+                        <i class="fas fa-tachometer-alt me-2"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+
+                <li class="submenu">
+                    <a href="#" class="d-flex align-items-center">
+                        <i class="fas fa-calendar-check me-2"></i>
+                        <span>Appointment</span> 
+                        <span class="menu-arrow ms-auto"></span>
+                    </a>
+                    <ul>
+                        <li><a href="{% url 'patientnewappointment' %}">New Appointment</a></li>
+                        <li><a href="{% url 'patientapprovedappointment' %}">Approved Appointment</a></li>
+                        <li><a href="{% url 'patientcancelledappointment' %}">Cancelled Appointment</a></li>
+                        <li><a href="{% url 'view_appointment' %}">All Appointments</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="{% url 'patientlistappointment' %}" class="d-flex align-items-center">
+                        <i class="fas fa-users me-2"></i>
+                        <span>Patient List</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'patientappointmentcompleted' %}" class="d-flex align-items-center">
+                        <i class="fas fa-check-circle me-2"></i>
+                        <span>Appointment Completed</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'between_date_report' %}" class="d-flex align-items-center">
+                        <i class="fas fa-file-alt me-2"></i>
+                        <span>B/D Appointment Report</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'search_appointment' %}" class="d-flex align-items-center">
+                        <i class="fas fa-search me-2"></i>
+                        <span>Search Appointment</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endif %}

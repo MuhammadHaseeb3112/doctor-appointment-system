@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <!-- Fonts and Styles -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
+    <link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/plugins/fontawesome/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7fc;
+        }
+
+        .loginbox {
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            padding: 40px;
+            max-width: 450px;
+            margin: 80px auto;
+        }
+
+        .loginbox h1 {
+            font-weight: 600;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        .account-subtitle {
+            font-size: 14px;
+            color: #6c757d;
+            margin-bottom: 30px;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0,123,255,0.3);
+        }
+
+        .btn-primary {
+            padding: 12px;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .link-btn {
+            display: block;
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            background: #17a2b8;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .link-btn:hover {
+            background: #117a8b;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="loginbox">
+        <h1 class="text-center">Login</h1>
+        <p class="account-subtitle text-center">Access to our dashboard</p>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <form action="{% url 'doLogin' %}" method="POST">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <input type="email" class="form-control" name="email" placeholder="Your Email Address" required>
+            </div>
+
+            <div class="form-group">
+                <input type="password" class="form-control" name="password" placeholder="Password" required>
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-primary btn-block" type="submit">Login</button>
+            </div>
+        </form>
+
+        <a href="{% url 'docsignup' %}" class="link-btn">Doctor Signup</a>
+        <a href="{% url 'index' %}" class="link-btn">Home Page</a>
+    </div>
+
+    <script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/script.js' %}"></script>
+
+</body>
+</html>
